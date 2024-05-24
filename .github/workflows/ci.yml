@@ -8,19 +8,23 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
         with:
-          node-version: '14'
+          distribution: 'adopt' # 또는 원하는 JDK 배포판
+          java-version: '11' # 필요한 Java 버전으로 설정
 
       - name: Install dependencies
-        run: npm install
+        run: ./gradlew dependencies # 또는 ./mvnw install
+
+      - name: Build
+        run: ./gradlew build # 또는 ./mvnw package
 
       - name: Run tests
-        run: npm test
+        run: ./gradlew test # 또는 ./mvnw test
