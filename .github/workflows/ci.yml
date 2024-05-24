@@ -20,11 +20,20 @@ jobs:
           distribution: 'adopt' # 또는 원하는 JDK 배포판
           java-version: '11' # 필요한 Java 버전으로 설정
 
-      - name: Install dependencies
-        run: ./gradlew dependencies
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-      - name: Build
-        run: ./gradlew build
+#      - name: Clear Gradle cache
+#        run: ./gradlew clean
+#
+#      - name: Build with refreshed dependencies
+#        run: ./gradlew build --refresh-dependencies
+#
+#      - name: Install dependencies
+#        run: ./gradlew dependencies
+#
+#      - name: Build
+#        run: ./gradlew build
 
       - name: Run tests
         run: ./gradlew test
