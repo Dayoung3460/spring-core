@@ -21,10 +21,10 @@ jobs:
           java-version: '11' # 필요한 Java 버전으로 설정
 
       - name: Install dependencies
-        run: ./gradlew dependencies # 또는 ./mvnw install
+        run: ./gradlew dependencies
 
       - name: Build
-        run: ./gradlew build # 또는 ./mvnw package
+        run: ./gradlew build
 
       - name: Run tests
-        run: ./gradlew test # 또는 ./mvnw test
+        run: ./gradlew test
