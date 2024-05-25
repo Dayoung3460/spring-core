@@ -1,7 +1,6 @@
 buildscript {
 	repositories {
 		mavenCentral()
-		jcenter()
 		google() // 필요에 따라 추가
 	}
 	dependencies {
