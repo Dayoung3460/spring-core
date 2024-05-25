@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt' # 또는 원하는 JDK 배포판
-          java-version: '11' # 필요한 Java 버전으로 설정
+          java-version: '22' # 필요한 Java 버전으로 설정
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
