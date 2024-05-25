@@ -5,7 +5,7 @@ buildscript {
 		google() // 필요에 따라 추가
 	}
 	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:3.2.5"
+//		classpath "org.springframework.boot:spring-boot-gradle-plugin:3.2.5"
 	}
 }
 
