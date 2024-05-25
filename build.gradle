@@ -36,6 +36,13 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+test {
+	reports {
+		html.enabled = true
+		html.destination = file("${buildDir}/reports/tests")
+	}
+}
+
 allprojects {
 	repositories {
 		mavenCentral()
