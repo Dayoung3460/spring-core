@@ -15,10 +15,10 @@ import org.springframework.context.annotation.Configuration;
 // 실제 동작에 필요한 구현 객체를 여기서 생성 및 연결
 
 public class AppConfig {
-
     @Bean
     // return 된 객체들이 스프링 컨체이너에 등록됨
     // 메서드 이름 = 스프링 빈 이름
+    // 빈 이름은 중복되면 안됨
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
