@@ -18,6 +18,9 @@ public class MemberApp {
         // 스프링 컨테이너는 xml 기반으로 만들 수도 있고 어노테이션 기반 자바 설정 클래스로 만들수도있음
         // 기존에는 AppConfig 사용해서 직접 객체 생성, DI 했지만 이젠 스프링 컨테이너 통해서함.
         // AnnotationConfigApplicationContext는 ApplicationContext의 구현체
+        // ApplicationContext는 BeanFactory를 상속받고 있음.
+        // BeanFactory의 기능(빈 관리 및 검색) 모두 제공받음. 그 외 부가기능 가지고 있음
+        // BeanFactory도 스프링 컨테이너라 함
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
         // 메서드 이름(memberService)으로 빈이 등록되어 있음
