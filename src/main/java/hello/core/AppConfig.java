@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 
 public class AppConfig {
     @Bean
-    // return 된 객체들이 스프링 컨체이너에 등록됨
+    // return 된 객체들이 스프링 컨테이너에 등록됨
     // 메서드 이름 = 스프링 빈 이름
     // 빈 이름은 중복되면 안됨
     public MemberService memberService() {
