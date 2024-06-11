@@ -12,8 +12,10 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+// @Configuration을 등록하지 않으면 CGLIB가 실행되지 않아서 싱글톤 보장이 안됨.
 @Configuration
 // 실제 동작에 필요한 구현 객체를 여기서 생성 및 연결
+// 스프링 컨테이너는 싱글톤 레지스트리.
 
 public class AppConfig {
     // memberService() 호출하면서 memberRepository()가 호출되고
