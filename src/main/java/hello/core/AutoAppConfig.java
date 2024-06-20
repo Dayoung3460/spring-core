@@ -12,7 +12,13 @@ import org.springframework.context.annotation.FilterType;
 @Configuration
 
 // @Component 어노테이션 붙인 애들을 스캔해서 스프링 빈으로 자동 등록해줌
+// @Component 뿐만 아니라 @Controller, @Service, @Repository, @Configuration 도 스캔 대상에 포함됨. 얘네들 안에 @Component 들어있음
 @ComponentScan(
+        // member 폴더 하위의 파일에서만 컴포넌트 스캔함. 탐색할 패키지의 시작위치 설정.
+        basePackages = "hello.core.member",
+        //AutoAppConfig의 패키지(package hello.core;)에서만 스캔
+        // 지정 안하면(디폴트): @ComponentScan이 붙은 설정 정보 클래스의 패키지가 시작 위치
+        basePackageClasses = AutoAppConfig.class,
         // 컴포넌트 스캔에서 제할 것들:
         // 1. @Bean으로 수동으로 등록되어 있는 것들, AppConfig에서 수동으로 등록(@Configuration)해준 것들
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
