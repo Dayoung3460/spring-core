@@ -4,6 +4,9 @@ package hello.core;
 //        -> 자동으로 스프링 빈 등록 가능: 컴포넌트 스캔
 //        -> 의존관계도 자동으로 주입 가능: @Autowired
 
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -26,4 +29,13 @@ import org.springframework.context.annotation.FilterType;
 
 // 기존 AppConfig와 다르게 @Bean으로 등록한 클래스 없음
 public class AutoAppConfig {
+    // 빈 중복 테스트하려고 똑같은 이름의 스프링 빈을 수동 등록했음
+    // 실행해보면
+    // 로그: Overriding bean definition for bean 'memoryMemberRepository' with a different definition: replacing [Generic bean: class [hello.core.member.MemoryMemberRepository];
+    // 수동 빈이 우선시 됨
+    // 수동 빈이 자동 빈 오버라이딩
+    @Bean(name = "memoryMemberRepository")
+    MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
 }
