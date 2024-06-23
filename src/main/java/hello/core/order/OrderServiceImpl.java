@@ -3,9 +3,11 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor // final이 붙은 필드를 파라미터로 받는 생성자를 만들어줌.. 롬복 아주 강려크...
 public class OrderServiceImpl implements OrderService {
 
     // memberRepository, discountPolicy는 불변. 밖에서 이 둘을 맘대로 못 바꿈
@@ -21,11 +23,11 @@ public class OrderServiceImpl implements OrderService {
     // 대부분의 의존관계 주입은 한번 일어나면 애플리케이션 종료시점까지 의존관계 변경할 일이 없음. 변경하면 안됨(불변의 법칙)
     // 객체 생성할 때 딱 한번만 호출되는게 좋음
 //    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        // 생성자 외에는 final 멤버 변수를 변경할 수 없음. 객체의 불변성 유지.
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        // 생성자 외에는 final 멤버 변수를 변경할 수 없음. 객체의 불변성 유지.
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     // 이렇게 해버리면 큰일나. 누가 밖에서 discountPolicy를 수정할 수 있잖아.
     // 불변의 법칙 어김
@@ -39,10 +41,5 @@ public class OrderServiceImpl implements OrderService {
         int discountPrice = discountPolicy.discount(member, itemPrice);
 
         return new Order(memberId, itemName, itemPrice, discountPrice);
-    }
-
-    // test
-    public MemberRepository getMemberRepository() {
-        return memberRepository;
     }
 }
