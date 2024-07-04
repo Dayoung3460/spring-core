@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -32,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
     // 3. @Primary: 우선 순위 지정
     // @Qualifier, @Primary 둘 다 있을 땐 @Qualifier가 우선.
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         // 생성자 외에는 final 멤버 변수를 변경할 수 없음. 객체의 불변성 유지.
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
