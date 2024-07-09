@@ -17,15 +17,7 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig {
-        // 빈 등록 초기화, 소멸 메소드: @Bean에 직접 메소드 이름 지정
-        // 코드가 아니라 설정 정보를 사용 -> 코드 고칠 수 없는 라이브러리에서도 초기화, 종료 메서드 적용 가능
-
-        // destroyMethod 들아가보면 AbstractBeanDefinition.INFER_METHOD
-        // 추론 메서드로 설정되어 있음(기본값이 destroyMethod = "(inferred)")
-        // 라이브러리 대부분 close, shutdown이라는 이름의 종료 메서드를 사용함.
-        // 직접 스프링 빈으로 등록하면 종료 메서드는 따로 적어주지 않아도 알아서 추론해서 close나 shutdown이라는 메서드를 호출해줌
-        // 추론 기능 사용하기 싫으면 -> destroyMethod = ""
-        @Bean(initMethod = "init", destroyMethod = "close")
+        @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             // 의존관계 주입이 끝나기 전에 setUrl을 하면 url null로 나옴.
