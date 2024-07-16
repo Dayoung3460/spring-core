@@ -25,7 +25,7 @@ public class MyLogger {
     @PostConstruct
     public void init() {
         // uuid를 저장해두면 다른 요청과 구분 가능
-        String uuid = UUID.randomUUID().toString();
+        uuid = UUID.randomUUID().toString();
         System.out.println("[" + uuid + "]" + "request scope bean create: " + this);
     }
 

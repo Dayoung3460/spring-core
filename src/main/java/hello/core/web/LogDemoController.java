@@ -3,6 +3,7 @@ package hello.core.web;
 import hello.core.common.MyLogger;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,18 +19,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class LogDemoController {
     private final LogDemoService logDemoService;
-    private final MyLogger myLogger;
+    private final ObjectProvider<MyLogger> myLoggerProvider;
 
     // maps HTTP requests to handler methods of MVC and REST controllers
     // it maps to logDemo method when the URL pattern is "log-demo"
     @RequestMapping("log-demo")
     // the return value of a method should be used as the body for the response
     @ResponseBody
-    public String logDemo(HttpServletRequest request) {
+    public String logDemo(HttpServletRequest request) throws InterruptedException {
         String requestURL = request.getRequestURL().toString();
+
+        // myLoggerProvider.getObject() 호출하는 시점까지 request scope 빈 생성 지연시키다가
+        // 호출되면 HTTP 요청이 진행중이므로 빈 생성이 정상처리됨
+        MyLogger myLogger = myLoggerProvider.getObject();
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
+//        Thread.sleep(1000);
         logDemoService.logic("testId");
         return "OK";
     }
